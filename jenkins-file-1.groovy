@@ -10,7 +10,6 @@ pipeline {
         GITCOMMIT = "${env.GIT_COMMIT}"
         POPESA = credentials('my.aws.credentials')
 
-
     }
     options {
         skipStagesAfterUnstable()
@@ -19,7 +18,7 @@ pipeline {
         stage('Echo') {
             steps {
                 sh '''
-                    echo 'hello world added jenkins file'
+                    echo 'hello world 786'
                     aws --version
                     echo $AWS_REGION
                     aws ec2 describe-instances
@@ -63,6 +62,5 @@ pipeline {
                 }
             }
         }
-
     }
 }

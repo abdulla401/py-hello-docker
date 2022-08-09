@@ -1,0 +1,32 @@
+aws ecr get-login-password --region region | docker login --username AWS --password-stdin aws_account_id.dkr.ecr.region.amazonaws.com
+
+aws ecr get-login-password --region us-east-2 | docker login --username AWS --password-stdin 870920198456.dkr.ecr.us-east-2.amazonaws.com
+
+
+aws ecr create-repository \
+    --repository-name dmarc_repo \
+    --image-scanning-configuration scanOnPush=true \
+    --region us-east-2
+
+docker build -t dmarc_repo .
+docker tag dmarc_repo:latest 870920198456.dkr.ecr.us-east-2.amazonaws.com/dmarc_repo
+docker push 870920198456.dkr.ecr.us-east-2.amazonaws.com/dmarc_repo
+
+docker build -t hello-world .
+docker tag hello-world:latest 870920198456.dkr.ecr.us-east-2.amazonaws.com/hello-world:latest
+docker push 870920198456.dkr.ecr.us-east-2.amazonaws.com/hello-world:latest
+
+docker tag hello-world:latest aws_account_id.dkr.ecr.region.amazonaws.com/hello-world:latest
+docker tag flask_docker:latest 870920198456.dkr.ecr.us-east-2.amazonaws.com/flash_docker:latest
+
+docker push 870920198456.dkr.ecr.us-east-2.amazonaws.com/flash_docker:latest
+docker pull 870920198456.dkr.ecr.us-east-2.amazonaws.com/flask_docker:latest
+docker push aws_account_id.dkr.ecr.region.amazonaws.com/hello-world:latest
+docker push 870920198456.dkr.ecr.us-east-2.amazonaws.com/flash_docker
+
+
+https://aws.amazon.com/blogs/devops/set-up-a-build-pipeline-with-jenkins-and-amazon-ecs/
+
+docker exec -it -u root 89e9ae9b1b9c /bin/bash
+
+docker
