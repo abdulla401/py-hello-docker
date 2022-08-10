@@ -19,7 +19,7 @@ pipeline {
         stage('Echo') {
             steps {
                 sh '''
-                    echo 'hello world added jenkins file'
+                    echo 'hello world added jenkins file edit here'
                     aws --version
                     echo $AWS_REGION
                     aws ec2 describe-instances
