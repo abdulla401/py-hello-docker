@@ -30,11 +30,7 @@ pipeline {
         }
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM', branches: [
-                        [name: '*/main']
-                ], extensions   : [], userRemoteConfigs: [
-                        [url: 'https://github.com/abdulla401/py-hello-docker']
-                ]])
+                checkout scm
             }
         }
 
